@@ -8,7 +8,7 @@ namespace TaskManagement.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<AppTask> builder)
         {
-            builder.Property(x => x.Priority).IsRequired();
+            builder.Property(x => x.PriorityId).IsRequired(true);
 
             builder.Property(x=>x.AppUserId).IsRequired();
 

@@ -10,5 +10,6 @@
         public int PriorityId { get; set; }
         public Priority? Priority { get; set; }
         public List<TaskReport>? TaskReports { get; set; }
+
     }
 }
