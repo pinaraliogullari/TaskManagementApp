@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using TaskManagement.Application.Dtos;
+using TaskManagement.Application.Extensions;
 using TaskManagement.Application.Interfaces;
 using TaskManagement.Application.Requests;
 using TaskManagement.Application.Validators;
@@ -22,25 +23,20 @@ namespace TaskManagement.Application.Handlers
 
             if (validationResult.IsValid)
             {
-                return new Result<LoginResponseDto?>(new LoginResponseDto("","",1),true,null,null);
+                var user = await _userRepository.GetByFilter(x => x.Password == request.Password && x.Username == request.Username);
+                if (user is not null)
+                    return new Result<LoginResponseDto?>(new LoginResponseDto(user.Name, user.Surname, user.AppRoleId), true, null, null);
+
+                return new Result<LoginResponseDto?>(null, false, "Username or password incorrect", null);
             }
             else
             {
-                var errors = validationResult.Errors.ToList();
-                var errorList= new List<ValidationError>();
-                foreach ( var error in errors)
-                {
-                    errorList.Add(new ValidationError
-                    (
-                        error.PropertyName,
-                        error.ErrorMessage
-                    ));
-                }
-                    return new Result<LoginResponseDto?>(null, false, "An error occured", errorList);
-               
+                var errorList = validationResult.Errors.ToMap();
+                return new Result<LoginResponseDto?>(null, false, null, errorList);
+
             }
 
-           
+
         }
     }
 }

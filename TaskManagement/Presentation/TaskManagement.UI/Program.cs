@@ -1,9 +1,11 @@
 using TaskManagement.Persistence;
+using TaskManagement.Application.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddPersistenceServices(builder.Configuration);
+builder.Services.AddApplicationServices();
 
 var app = builder.Build();
 if (!app.Environment.IsDevelopment())

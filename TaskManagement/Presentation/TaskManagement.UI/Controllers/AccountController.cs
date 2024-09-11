@@ -1,10 +1,19 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using TaskManagement.Application.Dtos;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using TaskManagement.Application.Requests;
 
 namespace TaskManagement.UI.Controllers
 {
     public class AccountController : Controller
     {
+
+        private readonly IMediator _mediator;
+
+        public AccountController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
+
         [HttpGet]
         public IActionResult Login()
         {
@@ -12,8 +21,9 @@ namespace TaskManagement.UI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(LoginDto dto)
+        public async Task<IActionResult> Login(LoginRequest request)
         {
+            var result= await _mediator.Send(request);
             return View();
         }
         public IActionResult Register()
