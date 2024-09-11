@@ -11,7 +11,7 @@ namespace TaskManagement.Persistence.Configurations
             builder.Property(x => x.Definition).IsRequired();
             builder.Property(x => x.Definition).HasMaxLength(250);
 
-            builder.HasMany(x=>x.Tasks).WithOne(x=>x.Priority).HasForeignKey(x=>x.PriorityId);
+            builder.HasMany(x => x.Tasks).WithOne(x => x.Priority).HasForeignKey(x => x.PriorityId);
         }
     }
 }

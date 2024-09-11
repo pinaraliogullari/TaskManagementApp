@@ -10,12 +10,12 @@ namespace TaskManagement.Persistence.Configurations
         {
             builder.Property(x => x.PriorityId).IsRequired(true);
 
-            builder.Property(x=>x.AppUserId).IsRequired();
+            builder.Property(x => x.AppUserId).IsRequired();
 
-            builder.Property(x=>x.Description).IsRequired();
+            builder.Property(x => x.Description).IsRequired();
 
-            builder.Property(x=>x.Title).IsRequired();
-            builder.Property(x=>x.Title).HasMaxLength(250);
+            builder.Property(x => x.Title).IsRequired();
+            builder.Property(x => x.Title).HasMaxLength(250);
 
             builder.HasMany(x => x.TaskReports).WithOne(x => x.AppTask).HasForeignKey(x => x.AppTaskId);
         }

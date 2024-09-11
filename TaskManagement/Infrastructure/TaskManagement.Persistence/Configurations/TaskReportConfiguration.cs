@@ -11,9 +11,9 @@ namespace TaskManagement.Persistence.Configurations
             builder.Property(x => x.Definition).IsRequired();
             builder.Property(x => x.Definition).HasMaxLength(250);
 
-            builder.Property(x=>x.Detail).IsRequired();
+            builder.Property(x => x.Detail).IsRequired();
 
-            builder.Property(x=>x.AppTaskId).IsRequired();
+            builder.Property(x => x.AppTaskId).IsRequired();
         }
     }
 }
