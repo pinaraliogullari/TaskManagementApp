@@ -5,4 +5,4 @@
 - CQRS Pattern
 - MediatR
 - Records
-- 
+- Custom Cookie Based Authentication

@@ -4,6 +4,7 @@ using TaskManagement.Application.Extensions;
 using TaskManagement.Application.Interfaces;
 using TaskManagement.Application.Requests;
 using TaskManagement.Application.Validators;
+using TaskManagement.Domain.Enums;
 
 namespace TaskManagement.Application.Handlers
 {
@@ -24,9 +25,12 @@ namespace TaskManagement.Application.Handlers
             if (validationResult.IsValid)
             {
                 var user = await _userRepository.GetByFilter(x => x.Password == request.Password && x.Username == request.Username);
-                if (user is not null)
-                    return new Result<LoginResponseDto?>(new LoginResponseDto(user.Name, user.Surname, user.AppRoleId), true, null, null);
 
+                if (user is not null)
+                {
+                    var type = (RoleType)user.AppRoleId;
+                    return new Result<LoginResponseDto?>(new LoginResponseDto(user.Name, user.Surname, type), true, null, null);
+                }
                 return new Result<LoginResponseDto?>(null, false, "Username or password incorrect", null);
             }
             else

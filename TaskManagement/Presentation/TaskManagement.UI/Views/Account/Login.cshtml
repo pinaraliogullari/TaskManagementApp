@@ -1,6 +1,9 @@
 ﻿@{
     Layout = null;
 }
+
+@model LoginRequest
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,25 +15,33 @@
     <div class="container">
         <div class="card p-5 mt-5 w-50 mx-auto shadow">
             <div class="text-center">
-                <h5 >Task Management System</h5>
+                <h5>Task Management System</h5>
                 <i class="lead">Login Screen</i>
             </div>
             <form asp-controller="Account" asp-action="Login" method="post" class="form-floating mt-3">
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="username" name="Username" placeholder="">
+                    <input type="text" class="form-control" asp-for="Username" placeholder="">
                     <label for="username">Username</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="password" class="form-control" id="password" name="Password" placeholder="">
+                    <input type="password" class="form-control" asp-for="Password" placeholder="">
                     <label for="password">Password</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" checked="@Model.RememberMe" asp-for="RememberMe">
+                    <label class="form-check-label" for="RememberMe">
+                        Beni Hatırla
+                    </label>
                 </div>
                 <div class="d-grid gap-2">
                     <button class="btn btn-lg btn-primary" type="submit">Login</button>
-                    <a class="btn btn-lg btn-danger" href="#" >Register</a>
+                    <a class="btn btn-lg btn-danger" href="#">Register</a>
                 </div>
+
+                <div class="text-danger lead" asp-validation-summary="All"> </div>
             </form>
         </div>
-      
+
     </div>
-</body> 
+</body>
 </html>

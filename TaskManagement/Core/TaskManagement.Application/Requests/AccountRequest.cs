@@ -3,5 +3,5 @@ using TaskManagement.Application.Dtos;
 
 namespace TaskManagement.Application.Requests
 {
-    public record LoginRequest(string Username, string Password):IRequest<Result<LoginResponseDto?>>;
+    public record LoginRequest(string? Username, string? Password, bool RememberMe = false) :IRequest<Result<LoginResponseDto?>>;
 }
