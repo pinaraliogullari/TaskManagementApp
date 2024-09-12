@@ -24,7 +24,7 @@ namespace TaskManagement.Application.Handlers
 
             if (validationResult.IsValid)
             {
-                var user = await _userRepository.GetByFilter(x => x.Password == request.Password && x.Username == request.Username);
+                var user = await _userRepository.GetByFilterAsync(x => x.Password == request.Password && x.Username == request.Username);
 
                 if (user is not null)
                 {

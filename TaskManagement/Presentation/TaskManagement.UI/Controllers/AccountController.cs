@@ -50,9 +50,34 @@ namespace TaskManagement.UI.Controllers
             }
 
         }
+
+        [HttpGet]
         public IActionResult Register()
         {
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Register(RegisterRequest request)
+        {
+            var result = await _mediator.Send(request);
+            if (result.IsSuccess)
+                return RedirectToAction("Login");
+            else
+            {
+                if (result.Errors != null && result.Errors.Count > 0)
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", result.ErrorMessage ?? "Unknown error occured.Please contact with system provider.");
+                }
+                return View(request);
+            }
         }
         public async Task<IActionResult> Logout()
         {
