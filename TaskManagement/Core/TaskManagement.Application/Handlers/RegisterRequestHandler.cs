@@ -31,7 +31,7 @@ namespace TaskManagement.Application.Handlers
             else
             {
                 var errorList = validationResult.Errors.ToMap();
-                return new Result<NoData>(new NoData(),false,null,errorList);
+                return new Result<NoData>(new NoData(), false, null, errorList);
             }
 
         }

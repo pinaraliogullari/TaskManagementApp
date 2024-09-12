@@ -1,12 +1,11 @@
 ﻿using FluentValidation.Results;
-using System.ComponentModel.DataAnnotations;
 using TaskManagement.Application.Dtos;
 
 namespace TaskManagement.Application.Extensions
 {
     public static class ValidationExtension
     {
-        public static List<ValidationError> ToMap(this List<ValidationFailure> errors) 
+        public static List<ValidationError> ToMap(this List<ValidationFailure> errors)
         {
             var errorList = new List<ValidationError>();
             foreach (var error in errors)
@@ -18,6 +17,6 @@ namespace TaskManagement.Application.Extensions
                 ));
             }
             return errorList;
-        } 
+        }
     }
 }

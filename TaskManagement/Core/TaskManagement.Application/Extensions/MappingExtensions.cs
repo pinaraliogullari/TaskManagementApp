@@ -14,7 +14,7 @@ namespace TaskManagement.Application.Extensions
                 Name = request.Name,
                 Surname = request.Surname,
                 Password = request.Password,
-                
+
                 Username = request.Username,
             };
         }

@@ -3,7 +3,7 @@ using TaskManagement.Application.Requests;
 
 namespace TaskManagement.Application.Validators
 {
-    public class LoginRequestValidator:AbstractValidator<LoginRequest>
+    public class LoginRequestValidator : AbstractValidator<LoginRequest>
     {
         public LoginRequestValidator()
         {

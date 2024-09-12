@@ -21,10 +21,10 @@ namespace TaskManagement.Persistence.Repositories
             return await _context.SaveChangesAsync();
         }
 
-        public async Task<AppUser?> GetByFilterAsync(Expression<Func<AppUser, bool>> filter, bool asNoTracking=true)
+        public async Task<AppUser?> GetByFilterAsync(Expression<Func<AppUser, bool>> filter, bool asNoTracking = true)
         {
             if (asNoTracking)
-              return await _context.Users.AsNoTracking().SingleOrDefaultAsync(filter);
+                return await _context.Users.AsNoTracking().SingleOrDefaultAsync(filter);
 
             return await _context.Users.SingleOrDefaultAsync(filter);
 
