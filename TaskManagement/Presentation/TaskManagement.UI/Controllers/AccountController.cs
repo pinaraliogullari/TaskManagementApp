@@ -21,7 +21,7 @@ namespace TaskManagement.UI.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            return View(new LoginRequest("",""));
+            return View(new LoginRequest("", ""));
         }
 
         [HttpPost]
@@ -30,7 +30,7 @@ namespace TaskManagement.UI.Controllers
             var result = await _mediator.Send(request);
             if (result.IsSuccess && result.Data is not null)
             {
-                await SetAuthCookie(result.Data,request.RememberMe);
+                await SetAuthCookie(result.Data, request.RememberMe);
                 return RedirectToAction("Index", "Home", new { area = "Admin" });
             }
             else
@@ -48,18 +48,20 @@ namespace TaskManagement.UI.Controllers
                 }
                 return View(request);
             }
-           
+
         }
         public IActionResult Register()
         {
             return View();
         }
-        public IActionResult Logout()
+        public async Task<IActionResult> Logout()
         {
-            return View();
+            await HttpContext.SignOutAsync
+                (CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Login");
         }
 
-        private async Task SetAuthCookie(LoginResponseDto dto,bool rememberMe)
+        private async Task SetAuthCookie(LoginResponseDto dto, bool rememberMe)
         {
             var claims = new List<Claim>
         {
