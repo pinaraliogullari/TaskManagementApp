@@ -30,7 +30,24 @@ namespace TaskManagement.UI.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(PriorityCreateRequest request)
         {
-            return View();
+          var result= await _mediator.Send(request);
+            if(result.IsSuccess)
+                return RedirectToAction("List");
+            else
+            {
+                if(result.Errors?.Count>0)
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", result.ErrorMessage ?? "Unknown error occured. Please contact with your service provider");
+                }
+                return View(request);
+            }
         }
     }
 }
