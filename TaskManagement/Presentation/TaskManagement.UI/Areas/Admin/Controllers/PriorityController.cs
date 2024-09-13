@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using TaskManagement.Application.Requests;
 
 namespace TaskManagement.UI.Areas.Admin.Controllers
 {
@@ -7,9 +9,17 @@ namespace TaskManagement.UI.Areas.Admin.Controllers
     [Authorize(Roles ="Admin")]
     public class PriorityController : Controller
     {
-        public IActionResult List()
+        private readonly IMediator _mediator;
+
+        public PriorityController(IMediator mediator)
         {
-            return View();
+            _mediator = mediator;
+        }
+
+        public async Task<IActionResult> List()
+        {
+            var result = await _mediator.Send(new PriorityListRequest());
+            return View(result.Data);
         }
     }
 }

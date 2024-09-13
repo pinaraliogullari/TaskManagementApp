@@ -15,7 +15,9 @@ namespace TaskManagement.Persistence
             {
                 options.UseSqlServer(configuration.GetConnectionString("SqlConnection"));
             });
+
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IPriorityRepository,PriorityRepository>();
         }
     }
 }
