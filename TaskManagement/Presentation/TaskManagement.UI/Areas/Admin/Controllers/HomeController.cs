@@ -10,6 +10,7 @@ namespace TaskManagement.UI.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.Title = "Index";
             return View();
         }
 
