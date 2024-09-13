@@ -6,7 +6,7 @@ using TaskManagement.Application.Requests;
 using TaskManagement.Application.Validators;
 using TaskManagement.Domain.Enums;
 
-namespace TaskManagement.Application.Handlers
+namespace TaskManagement.Application.Handlers.Account
 {
     public class LoginRequestHandler : IRequestHandler<LoginRequest, Result<LoginResponseDto?>>
     {

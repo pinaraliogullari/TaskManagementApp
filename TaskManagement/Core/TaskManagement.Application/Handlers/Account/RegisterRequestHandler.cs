@@ -5,7 +5,7 @@ using TaskManagement.Application.Interfaces;
 using TaskManagement.Application.Requests;
 using TaskManagement.Application.Validators;
 
-namespace TaskManagement.Application.Handlers
+namespace TaskManagement.Application.Handlers.Account
 {
     public class RegisterRequestHandler : IRequestHandler<RegisterRequest, Result<NoData>>
     {
