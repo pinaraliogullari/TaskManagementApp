@@ -21,5 +21,16 @@ namespace TaskManagement.UI.Areas.Admin.Controllers
             var result = await _mediator.Send(new PriorityListRequest());
             return View(result.Data);
         }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(PriorityCreateRequest request)
+        {
+            return View();
+        }
     }
 }

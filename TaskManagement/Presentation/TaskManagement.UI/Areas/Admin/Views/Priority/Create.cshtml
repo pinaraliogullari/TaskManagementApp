@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Create Priority Status";
+}
+
+@model PriorityCreateRequest
+
+<form asp-area="Admin" asp-controller="Priority" asp-action="Create" method="post">
+
+    <div class="mb-3">
+        <label class="form-label">Priority Definition:</label>
+        <input asp-for="Definition" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <button type="submit" class="btn btn-primary">Create</button>
+    </div>
+    <div class="text-danger lead" asp-validation-summary="All"></div>
+</form>
