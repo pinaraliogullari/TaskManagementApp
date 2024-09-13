@@ -6,7 +6,7 @@ using TaskManagement.Application.Requests;
 namespace TaskManagement.UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles ="Admin")]
+    [Authorize(Roles = "Admin")]
     public class PriorityController : Controller
     {
         private readonly IMediator _mediator;
@@ -30,12 +30,12 @@ namespace TaskManagement.UI.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(PriorityCreateRequest request)
         {
-          var result= await _mediator.Send(request);
-            if(result.IsSuccess)
+            var result = await _mediator.Send(request);
+            if (result.IsSuccess)
                 return RedirectToAction("List");
             else
             {
-                if(result.Errors?.Count>0)
+                if (result.Errors?.Count > 0)
                 {
                     foreach (var error in result.Errors)
                     {
@@ -48,6 +48,12 @@ namespace TaskManagement.UI.Areas.Admin.Controllers
                 }
                 return View(request);
             }
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _mediator.Send(new PriorityDeleteRequest(id));
+            return RedirectToAction("List");
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using TaskManagement.Domain.Entities;
+﻿using System.Linq.Expressions;
+using TaskManagement.Domain.Entities;
 
 namespace TaskManagement.Application.Interfaces
 {
@@ -6,5 +7,8 @@ namespace TaskManagement.Application.Interfaces
     {
         Task<List<Priority>> GetAllAsync();
         Task<int> CreateAsync(Priority priority);
+        Task<Priority?> GetByFilterNoTrackingAsync(Expression<Func<Priority, bool>> predicate);
+        Task<Priority?> GetByFilterAsync(Expression<Func<Priority, bool>> predicate);
+        Task DeleteAsync(Priority priority);
     }
 }
