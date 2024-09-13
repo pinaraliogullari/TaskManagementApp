@@ -1,10 +1,9 @@
 ﻿using MediatR;
-using System.IO.Pipes;
 using TaskManagement.Application.Dtos;
 using TaskManagement.Application.Interfaces;
 using TaskManagement.Application.Requests;
 
-namespace TaskManagement.Application.Handlers.Priority
+namespace TaskManagement.Application.Handlers
 {
     public class PriorityDeleteHandler : IRequestHandler<PriorityDeleteRequest, Result<NoData>>
     {

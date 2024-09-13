@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "Update Priority Status";
+}
+
+@model PriorityUpdateRequest
+
+<form asp-area="Admin" asp-controller="Priority" asp-action="Update" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div class="mb-3">
+        <label class="form-label">Priority Definition:</label>
+        <input asp-for="Definition" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <a asp-area="Admin" asp-controller="Priority" asp-action="List" class="btn btn-secondary">Cancel</a>
+        <button type="submit" class="btn btn-primary">Update</button>
+    </div>
+    <div class="text-danger lead" asp-validation-summary="All"></div>
+</form>

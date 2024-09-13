@@ -17,7 +17,7 @@ namespace TaskManagement.Persistence
             });
 
             services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IPriorityRepository,PriorityRepository>();
+            services.AddScoped<IPriorityRepository, PriorityRepository>();
         }
     }
 }

@@ -19,7 +19,7 @@ namespace TaskManagement.Application.Handlers
             var result = await _priorityRepository.GetAllAsync();
             var mappedResult = result.Select(x => new PriorityListDto(x.Id, x.Definition)).ToList();
 
-            return new Result<List<PriorityListDto>>(mappedResult, true,null,null);
+            return new Result<List<PriorityListDto>>(mappedResult, true, null, null);
         }
     }
 }
