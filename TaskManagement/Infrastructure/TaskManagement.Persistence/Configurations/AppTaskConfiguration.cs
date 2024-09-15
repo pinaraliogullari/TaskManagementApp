@@ -10,7 +10,7 @@ namespace TaskManagement.Persistence.Configurations
         {
             builder.Property(x => x.PriorityId).IsRequired(true);
 
-            builder.Property(x => x.AppUserId).IsRequired();
+            builder.Property(x => x.AppUserId).IsRequired(false);
 
             builder.Property(x => x.Description).IsRequired();
 
