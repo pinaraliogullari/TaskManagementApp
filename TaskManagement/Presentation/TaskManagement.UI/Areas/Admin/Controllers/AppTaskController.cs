@@ -6,7 +6,7 @@ using TaskManagement.Application.Requests;
 namespace TaskManagement.UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles ="Admin")]
+    [Authorize(Roles = "Admin")]
     public class AppTaskController : Controller
     {
         private readonly IMediator _mediator;
@@ -16,9 +16,9 @@ namespace TaskManagement.UI.Areas.Admin.Controllers
             _mediator = mediator;
         }
 
-        public async Task<IActionResult>List()
+        public async Task<IActionResult> List(int activePage = 1)
         {
-            var result= await _mediator.Send(new AppTaskListRequest());
+            var result = await _mediator.Send(new AppTaskListRequest(activePage));
             return View(result.Data);
         }
     }

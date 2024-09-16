@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using TaskManagement.Application.Dtos;
 using TaskManagement.Application.Interfaces;
 using TaskManagement.Domain.Entities;
 using TaskManagement.Persistence.Context;
+using TaskManagement.Persistence.Extensions;
 
 namespace TaskManagement.Persistence.Repositories
 {
@@ -14,8 +16,10 @@ namespace TaskManagement.Persistence.Repositories
             _context = context;
         }
 
-        public async Task<List<AppTask>> GetAllAsync()=>
-            await _context.Tasks.Include(x=>x.Priority).AsNoTracking().ToListAsync();
-        
+
+
+        public async Task<PagedData<AppTask>> GetAllAsync(int activePage, int pageSize = 10) =>
+            await _context.Tasks.Include(x => x.Priority).AsNoTracking().ToPagedAsync(activePage, pageSize);
+
     }
 }

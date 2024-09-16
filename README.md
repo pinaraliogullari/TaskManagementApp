@@ -6,3 +6,4 @@
 - MediatR
 - Records
 - Custom Cookie Based Authentication
+- Fluent Validation

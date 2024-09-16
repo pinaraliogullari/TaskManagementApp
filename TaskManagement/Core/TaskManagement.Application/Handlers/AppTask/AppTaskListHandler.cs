@@ -5,7 +5,7 @@ using TaskManagement.Application.Requests;
 
 namespace TaskManagement.Application.Handlers
 {
-    public class AppTaskListHandler : IRequestHandler<AppTaskListRequest, Result<List<AppTaskListDto>>>
+    public class AppTaskListHandler : IRequestHandler<AppTaskListRequest, PagedResult<AppTaskListDto>>
     {
         private readonly IAppTaskRepository _appTaskRepository;
 
@@ -14,18 +14,18 @@ namespace TaskManagement.Application.Handlers
             _appTaskRepository = appTaskRepository;
         }
 
-        public async Task<Result<List<AppTaskListDto>>> Handle(AppTaskListRequest request, CancellationToken cancellationToken)
+        public async Task<PagedResult<AppTaskListDto>> Handle(AppTaskListRequest request, CancellationToken cancellationToken)
         {
-            var list = await _appTaskRepository.GetAllAsync();
-            var result= new List<AppTaskListDto>();
+            var list = await _appTaskRepository.GetAllAsync(request.ActivePage);
+            var result = new List<AppTaskListDto>();
 
-            foreach (var appTask in list) 
-            { 
-                var dto= new AppTaskListDto(appTask.Id,appTask.Title,appTask.Description,appTask.Priority?.Definition,appTask.State);
+            foreach (var appTask in list.Data)
+            {
+                var dto = new AppTaskListDto(appTask.Id, appTask.Title, appTask.Description, appTask.Priority?.Definition, appTask.State);
                 result.Add(dto);
             }
 
-            return new Result<List<AppTaskListDto>>(result,true,null,null);
+            return new PagedResult<AppTaskListDto>(result, request.ActivePage, list.PageSize, list.TotalPages);
         }
     }
 }
