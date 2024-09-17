@@ -8,15 +8,26 @@
         <a asp-area="Admin" asp-controller="AppTask" asp-action="Create">Create</a>
     </div>
     <div class="col-3">
-        <form>
+        <form asp-area="Admin" asp-controller="AppTask" asp-action="List" method="get">
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
+                <input name="s" type="text" class="form-control" placeholder="Search task" aria-label="Search task" aria-describedby="button-addon2">
                 <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Search</button>
             </div>
         </form>
       
     </div>
 </div>
+@{
+    if (!string.IsNullOrEmpty(ViewBag.s))
+    {
+        <div class="row">
+            <div class="alert alert-secondary" role="alert">
+                You see the records according to <strong>@ViewBag.s</strong>  search filter.
+                <a asp-area="Admin" asp-controller="AppTask" asp-action="List" asp-route-s="" class="float-end">Remove the filter</a>
+            </div>
+        </div>
+    }
+}
 
 
 <table class="table table-sm mt-2">
@@ -60,7 +71,7 @@
             @for (int i = 1; i <= Model.TotalPage; i++)
             {
                 <li class="page-item">
-                    <a class="page-link @(Model.ActivePage==i?"active":"")" asp-area="Admin" asp-controller="AppTask" asp-action="List" asp-route-activePage="@i">@i</a>
+                    <a class="page-link @(Model.ActivePage==i?"active":"")" asp-area="Admin" asp-controller="AppTask" asp-action="List" asp-route-activePage="@i" asp-route-s="@ViewBag.s">@i</a>
                     </li>
             }
          

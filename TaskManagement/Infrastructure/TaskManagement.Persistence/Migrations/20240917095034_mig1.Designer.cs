@@ -12,8 +12,8 @@ using TaskManagement.Persistence.Context;
 namespace TaskManagement.Persistence.Migrations
 {
     [DbContext(typeof(TaskManagementDbContext))]
-    [Migration("20240915184700_NullableAppUserId")]
-    partial class NullableAppUserId
+    [Migration("20240917095034_mig1")]
+    partial class mig1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
