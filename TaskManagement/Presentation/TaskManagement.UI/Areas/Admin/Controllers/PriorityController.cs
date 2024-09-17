@@ -18,18 +18,21 @@ namespace TaskManagement.UI.Areas.Admin.Controllers
 
         public async Task<IActionResult> List()
         {
+            ViewBag.Active = "Priority";
             var result = await _mediator.Send(new PriorityListRequest());
             return View(result.Data);
         }
 
         public IActionResult Create()
         {
+            ViewBag.Active = "Priority";
             return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> Create(PriorityCreateRequest request)
         {
+            ViewBag.Active = "Priority";
             var result = await _mediator.Send(request);
             if (result.IsSuccess)
                 return RedirectToAction("List");
@@ -52,12 +55,14 @@ namespace TaskManagement.UI.Areas.Admin.Controllers
 
         public async Task<IActionResult> Delete(int id)
         {
+            ViewBag.Active = "Priority";
             await _mediator.Send(new PriorityDeleteRequest(id));
             return RedirectToAction("List");
         }
 
         public async Task<IActionResult> Update(int id)
         {
+            ViewBag.Active = "Priority";
             var result = await _mediator.Send(new PriorityGetByIdRequest(id));
             if (result.IsSuccess)
             {
@@ -76,6 +81,7 @@ namespace TaskManagement.UI.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(PriorityUpdateRequest request)
         {
+            ViewBag.Active = "Priority";
             var result = await _mediator.Send(request);
             if (result.IsSuccess)
                 return RedirectToAction("List");

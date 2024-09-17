@@ -18,6 +18,7 @@ namespace TaskManagement.UI.Areas.Admin.Controllers
 
         public async Task<IActionResult> List(int activePage = 1)
         {
+            ViewBag.Active = "AppTask";
             var result = await _mediator.Send(new AppTaskListRequest(activePage));
             return View(result.Data);
         }
