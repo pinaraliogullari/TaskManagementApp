@@ -16,16 +16,20 @@ namespace TaskManagement.Persistence.Repositories
             _context = context;
         }
 
-           
+        public async Task<int> CreateAsync(AppTask appTask)
+        {
+            await _context.Tasks.AddAsync(appTask);
+            return await _context.SaveChangesAsync();
+        }
 
         public async Task<PagedData<AppTask>> GetAllAsync(int activePage, string? s = null, int pageSize = 10)
         {
-            var query= _context.Tasks.AsQueryable();
-            if(!string.IsNullOrEmpty(s))
+            var query = _context.Tasks.AsQueryable();
+            if (!string.IsNullOrEmpty(s))
             {
-                 query=query.Where(x => x.Title.ToLower().Contains(s.ToLower()));
+                query = query.Where(x => x.Title.ToLower().Contains(s.ToLower()));
             }
-            var list= await query.Include(x => x.Priority).AsNoTracking().ToPagedAsync(activePage, pageSize);
+            var list = await query.Include(x => x.Priority).AsNoTracking().ToPagedAsync(activePage, pageSize);
             return list;
         }
 
